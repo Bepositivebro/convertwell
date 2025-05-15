@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Converter</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+    }
+    
+    input, select, button {
+        padding: 10px;
+        margin: 10px 0;
+        width: 80%;
+    }
+    
+    button {
+        cursor: pointer;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    #results {
+        margin-top: 20px;
+    }
+    
+    p {
+        margin: 5px 0;
+    }
+    
+    span {
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Time Converter</h1>
+        <input type="text" id="inputTime" placeholder="Enter time">
+        <select id="inputUnit">
+            <option value="second">Second (s)</option>
+            <option value="millisecond">Millisecond (ms)</option>
+            <option value="microsecond">Microsecond (µs)</option>
+            <option value="nanosecond">Nanosecond (ns)</option>
+            <option value="minute">Minute (min)</option>
+            <option value="hour">Hour (hr)</option>
+            <option value="day">Day (d)</option>
+            <option value="week">Week (wk)</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+            <option value="julian_year">Julian Year</option>
+            <option value="sidereal_day">Sidereal Day</option>
+            <option value="julian_day">Julian Day</option>
+            <option value="decade">Decade</option>
+            <option value="century">Century</option>
+            <option value="millennium">Millennium</option>
+        </select>
+        <button onclick="convertTime()">Convert</button>
+        
+        <div id="results">
+            <!-- Output results will be displayed here -->
+        </div>
+    </div>
+    <script>
+        function convertTime() {
+    const inputTime = document.getElementById('inputTime').value.trim();
+    const inputUnit = document.getElementById('inputUnit').value;
+
+    if (inputTime === '' || isNaN(inputTime)) {
+        alert("Please enter a valid number.");
+        return;
+    }
+
+    const units = {
+        'second': 1,
+        'millisecond': 1e3,
+        'microsecond': 1e6,
+        'nanosecond': 1e9,
+        'minute': 60,
+        'hour': 3600,
+        'day': 86400,
+        'week': 604800,
+        'month': 2629800, // Average month length in seconds
+        'year': 31557600, // Average year length in seconds
+        'julian_year': 31557600, // Julian year length in seconds
+        'sidereal_day': 86164.1, // Sidereal day length in seconds
+        'julian_day': 86400, // Julian day length in seconds
+        'decade': 315576000, // 10 years
+        'century': 3155760000, // 100 years
+        'millennium': 31557600000 // 1000 years
+    };
+
+    const results = document.getElementById('results');
+    results.innerHTML = ''; // Clear previous results
+
+    for (const [unit, value] of Object.entries(units)) {
+        let convertedValue;
+        if (unit === 'century' || unit === 'millennium') {
+            // For larger units, convert years to that unit
+            convertedValue = inputTime / (value / units['year']);
+        } else {
+            convertedValue = inputTime * (1 / value);
+        }
+        const p = document.createElement('p');
+        p.textContent = `${unit.charAt(0).toUpperCase() + unit.slice(1)}: ${convertedValue.toFixed(2)}`;
+        results.appendChild(p);
+    }
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCM and HCF Calculator</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+span {
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LCM and HCF Calculator</h1>
+        <input type="text" id="numbersInput" placeholder="Enter numbers separated by commas">
+        <button onclick="calculate()">Calculate</button>
+        
+        <div id="results">
+            <p>LCM: <span id="lcmResult"></span></p>
+            <p>HCF: <span id="hcfResult"></span></p>
+        </div>
+    </div>
+    <script>
+        // Function to find the GCD (Greatest Common Divisor) of two numbers
+function gcd(a, b) {
+    if (b === 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+// Function to find the LCM (Least Common Multiple) of two numbers
+function lcm(a, b) {
+    return (a * b) / gcd(a, b);
+}
+
+// Function to find the LCM of multiple numbers
+function lcmOfNumbers(numbers) {
+    let result = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        result = lcm(result, numbers[i]);
+    }
+    return result;
+}
+
+// Function to find the HCF (Highest Common Factor) of multiple numbers
+function hcfOfNumbers(numbers) {
+    let result = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        result = gcd(result, numbers[i]);
+    }
+    return result;
+}
+
+function calculate() {
+    const input = document.getElementById('numbersInput').value;
+    const numbers = input.split(',').map(Number);
+
+    const lcmResult = lcmOfNumbers(numbers);
+    const hcfResult = hcfOfNumbers(numbers);
+
+    document.getElementById('lcmResult').textContent = lcmResult;
+    document.getElementById('hcfResult').textContent = hcfResult;
+}
+
+    </script>
+</body>
+</html>

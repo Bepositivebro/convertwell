@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        /* Media Queries for larger screens */
+        @media (min-width: 600px) {
+            body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <input type="number" id="inputAmount" placeholder="Enter amount">
+        <select id="inputCurrency">
+            <option value="USD" selected>US Dollar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="JPY">Japanese Yen (JPY)</option>
+            <option value="GBP">British Pound (GBP)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="CAD">Canadian Dollar (CAD)</option>
+            <option value="CHF">Swiss Franc (CHF)</option>
+            <option value="CNY">Chinese Yuan (CNY)</option>
+            <option value="INR">Indian Rupee (INR)</option>
+            <option value="KRW">South Korean Won (KRW)</option>
+            <option value="HKD">Hong Kong Dollar (HKD)</option>
+            <option value="NZD">New Zealand Dollar (NZD)</option>
+            <option value="SGD">Singapore Dollar (SGD)</option>
+        </select>
+        <select id="outputCurrency">
+            <option value="USD">US Dollar (USD)</option>
+            <option value="EUR" selected>Euro (EUR)</option>
+            <option value="JPY">Japanese Yen (JPY)</option>
+            <option value="GBP">British Pound (GBP)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="CAD">Canadian Dollar (CAD)</option>
+            <option value="CHF">Swiss Franc (CHF)</option>
+            <option value="CNY">Chinese Yuan (CNY)</option>
+            <option value="INR">Indian Rupee (INR)</option>
+            <option value="KRW">South Korean Won (KRW)</option>
+            <option value="HKD">Hong Kong Dollar (HKD)</option>
+            <option value="NZD">New Zealand Dollar (NZD)</option>
+            <option value="SGD">Singapore Dollar (SGD)</option>
+        </select>
+        <button onclick="convertCurrency()">Convert</button>
+        
+        <div id="results">
+            <p>Converted Amount: <span id="convertedAmount"></span></p>
+        </div>
+    </div>
+    <script>
+        const exchangeRates = {
+            "USD": 1.0,
+            "EUR": 0.85,
+            "JPY": 110.47,
+            "GBP": 0.75,
+            "AUD": 1.35,
+            "CAD": 1.25,
+            "CHF": 0.91,
+            "CNY": 6.45,
+            "INR": 74.0,
+            "KRW": 1140.70,
+            "HKD": 7.78,
+            "NZD": 1.44,
+            "SGD": 1.36
+        };
+
+        function convertCurrency() {
+            const inputAmount = parseFloat(document.getElementById('inputAmount').value);
+            const inputCurrency = document.getElementById('inputCurrency').value;
+            const outputCurrency = document.getElementById('outputCurrency').value;
+
+            if (isNaN(inputAmount)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            const amountInUSD = inputAmount / exchangeRates[inputCurrency];
+            const convertedAmount = amountInUSD * exchangeRates[outputCurrency];
+
+            document.getElementById('convertedAmount').textContent = convertedAmount.toFixed(2);
+        }
+    </script>
+</body>
+</html>

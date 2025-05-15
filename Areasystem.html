@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding and border don't increase width */
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Area Converter</h1>
+        <input type="number" id="inputArea" placeholder="Enter area">
+        <select id="inputUnit">
+            <option value="sqm">Square Meter (sqm)</option>
+            <option value="sqft" selected>Square Foot (sqft)</option>
+            <option value="sqyd">Square Yard (sqyd)</option>
+            <option value="acre">Acre</option>
+            <option value="hectare">Hectare</option>
+        </select>
+        <button onclick="convertArea()">Convert</button>
+        
+        <div id="results">
+            <p>Square Meter (sqm): <span id="sqmResult"></span></p>
+            <p>Square Foot (sqft): <span id="sqftResult"></span></p>
+            <p>Square Yard (sqyd): <span id="sqydResult"></span></p>
+            <p>Acre: <span id="acreResult"></span></p>
+            <p>Hectare: <span id="hectareResult"></span></p>
+        </div>
+    </div>
+    <script>
+        function convertArea() {
+            const inputArea = parseFloat(document.getElementById('inputArea').value);
+            const inputUnit = document.getElementById('inputUnit').value;
+
+            if (isNaN(inputArea)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            const sqm = convertToSquareMeter(inputArea, inputUnit);
+
+            document.getElementById('sqmResult').textContent = sqm.toFixed(2);
+            document.getElementById('sqftResult').textContent = (sqm * 10.7639).toFixed(2);
+            document.getElementById('sqydResult').textContent = (sqm * 1.19599).toFixed(2);
+            document.getElementById('acreResult').textContent = (sqm * 0.000247105).toFixed(6);
+            document.getElementById('hectareResult').textContent = (sqm * 0.0001).toFixed(6);
+        }
+
+        function convertToSquareMeter(area, unit) {
+            switch (unit) {
+                case 'sqm':
+                    return area;
+                case 'sqft':
+                    return area / 10.7639;
+                case 'sqyd':
+                    return area / 1.19599;
+                case 'acre':
+                    return area / 0.000247105;
+                case 'hectare':
+                    return area / 0.0001;
+                default:
+                    return area;
+            }
+        }
+    </script>
+</body>
+</html>

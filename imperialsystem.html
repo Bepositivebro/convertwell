@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Length Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        /* Media Queries for larger screens */
+        @media (min-width: 600px) {
+            body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Imperial Length Converter</h1>
+        <input type="number" id="inputLength" placeholder="Enter length">
+        <select id="inputUnit">
+            <option value="thou">Thou (mil)</option>
+            <option value="inch">Inch (in)</option>
+            <option value="foot" selected>Foot (ft)</option>
+            <option value="yard">Yard (yd)</option>
+            <option value="chain">Chain</option>
+            <option value="furlong">Furlong</option>
+            <option value="mile">Mile (mi)</option>
+            <option value="league">League</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        
+        <div id="results">
+            <p>Thou (mil): <span id="thouResult"></span></p>
+            <p>Inches: <span id="inchResult"></span></p>
+            <p>Feet: <span id="footResult"></span></p>
+            <p>Yards: <span id="yardResult"></span></p>
+            <p>Chains: <span id="chainResult"></span></p>
+            <p>Furlongs: <span id="furlongResult"></span></p>
+            <p>Miles: <span id="mileResult"></span></p>
+            <p>Leagues: <span id="leagueResult"></span></p>
+        </div>
+    </div>
+    <script>
+        function convertLength() {
+            const inputLength = parseFloat(document.getElementById('inputLength').value);
+            const inputUnit = document.getElementById('inputUnit').value;
+
+            if (isNaN(inputLength)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            const lengthInFeet = convertToFeet(inputLength, inputUnit);
+
+            document.getElementById('thouResult').textContent = (lengthInFeet * 12000).toFixed(2);
+            document.getElementById('inchResult').textContent = (lengthInFeet * 12).toFixed(2);
+            document.getElementById('footResult').textContent = lengthInFeet.toFixed(2);
+            document.getElementById('yardResult').textContent = (lengthInFeet / 3).toFixed(2);
+            document.getElementById('chainResult').textContent = (lengthInFeet / 66).toFixed(2);
+            document.getElementById('furlongResult').textContent = (lengthInFeet / 660).toFixed(2);
+            document.getElementById('mileResult').textContent = (lengthInFeet / 5280).toFixed(2);
+            document.getElementById('leagueResult').textContent = (lengthInFeet / 15840).toFixed(2);
+        }
+
+        function convertToFeet(length, unit) {
+            switch (unit) {
+                case 'thou':
+                    return length / 12000;
+                case 'inch':
+                    return length / 12;
+                case 'foot':
+                    return length;
+                case 'yard':
+                    return length * 3;
+                case 'chain':
+                    return length * 66;
+                case 'furlong':
+                    return length * 660;
+                case 'mile':
+                    return length * 5280;
+                case 'league':
+                    return length * 15840;
+                default:
+                    return length;
+            }
+        }
+    </script>
+</body>
+</html>

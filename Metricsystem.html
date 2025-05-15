@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+p {
+    margin: 5px 0;
+}
+
+span {
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Length Converter</h1>
+        <input type="number" id="inputLength" placeholder="Enter length">
+        <select id="inputUnit">
+            <option value="nm">Nanometer (nm)</option>
+            <option value="µm">Micrometer (µm)</option>
+            <option value="mm">Millimeter (mm)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="dm">Decimeter (dm)</option>
+            <option value="m" selected>Meter (m)</option>
+            <option value="dam">Decameter (dam)</option>
+            <option value="hm">Hectometer (hm)</option>
+            <option value="km">Kilometer (km)</option>
+            <option value="Mm">Megameter (Mm)</option>
+            <option value="Gm">Gigameter (Gm)</option>
+            <option value="Tm">Terameter (Tm)</option>
+            <option value="Pm">Petameter (Pm)</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        
+        <div id="results">
+            <p>Nanometers: <span id="nmResult"></span></p>
+            <p>Micrometers: <span id="µmResult"></span></p>
+            <p>Millimeters: <span id="mmResult"></span></p>
+            <p>Centimeters: <span id="cmResult"></span></p>
+            <p>Decimeters: <span id="dmResult"></span></p>
+            <p>Meters: <span id="mResult"></span></p>
+            <p>Decameters: <span id="damResult"></span></p>
+            <p>Hectometers: <span id="hmResult"></span></p>
+            <p>Kilometers: <span id="kmResult"></span></p>
+            <p>Megameters: <span id="MmResult"></span></p>
+            <p>Gigameters: <span id="GmResult"></span></p>
+            <p>Terameters: <span id="TmResult"></span></p>
+            <p>Petameters: <span id="PmResult"></span></p>
+        </div>
+    </div>
+    <script>
+        function convertLength() {
+    const inputLength = parseFloat(document.getElementById('inputLength').value);
+    const inputUnit = document.getElementById('inputUnit').value;
+
+    if (isNaN(inputLength)) {
+        alert("Please enter a valid number.");
+        return;
+    }
+
+    const lengthInMeters = convertToMeters(inputLength, inputUnit);
+
+    document.getElementById('nmResult').textContent = (lengthInMeters * 1e9).toFixed(2);
+    document.getElementById('µmResult').textContent = (lengthInMeters * 1e6).toFixed(2);
+    document.getElementById('mmResult').textContent = (lengthInMeters * 1e3).toFixed(2);
+    document.getElementById('cmResult').textContent = (lengthInMeters * 1e2).toFixed(2);
+    document.getElementById('dmResult').textContent = (lengthInMeters * 1e1).toFixed(2);
+    document.getElementById('mResult').textContent = lengthInMeters.toFixed(2);
+    document.getElementById('damResult').textContent = (lengthInMeters * 1e-1).toFixed(2);
+    document.getElementById('hmResult').textContent = (lengthInMeters * 1e-2).toFixed(2);
+    document.getElementById('kmResult').textContent = (lengthInMeters * 1e-3).toFixed(2);
+    document.getElementById('MmResult').textContent = (lengthInMeters * 1e-6).toFixed(2);
+    document.getElementById('GmResult').textContent = (lengthInMeters * 1e-9).toFixed(2);
+    document.getElementById('TmResult').textContent = (lengthInMeters * 1e-12).toFixed(2);
+    document.getElementById('PmResult').textContent = (lengthInMeters * 1e-15).toFixed(2);
+}
+
+function convertToMeters(length, unit) {
+    switch (unit) {
+        case 'nm':
+            return length * 1e-9;
+        case 'µm':
+            return length * 1e-6;
+        case 'mm':
+            return length * 1e-3;
+        case 'cm':
+            return length * 1e-2;
+        case 'dm':
+            return length * 1e-1;
+        case 'm':
+            return length;
+        case 'dam':
+            return length * 10;
+        case 'hm':
+            return length * 100;
+        case 'km':
+            return length * 1e3;
+        case 'Mm':
+            return length * 1e6;
+        case 'Gm':
+            return length * 1e9;
+        case 'Tm':
+            return length * 1e12;
+        case 'Pm':
+            return length * 1e15;
+        default:
+            return length;
+    }
+}
+
+    </script>
+</body>
+</html>

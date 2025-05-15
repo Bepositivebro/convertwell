@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>convertwell</title>
+    <link rel="stylesheet" href="convertwell.css">
+    <link rel="stylesheet" href="mediaconvert.css">
+    <style>
+      
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+      
+      /* Add this to your existing CSS file */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-text-color);
+    background: linear-gradient(45deg, rgba(29, 105, 163, 0.7), rgba(50, 178, 15, 0.7), rgba(240, 84, 84, 0.7), rgba(255, 215, 0, 0.7));
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+/* Ensure other sections are not affected by the background animation */
+.top-banner, .main-nav, .heading, .boxes, footer {
+    background: transparent; /* Set to transparent to show the gradient animation */
+}
+
+/* Optional: Additional 3D effect with a box-shadow for specific sections */
+.boxes {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for a floating effect */
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-text-color: #183b56;
+    --secondary-text-color: #577592;
+    --accent-color: black;
+    --accent-color-dark: #32b20f;
+    --padding-inline-section: 20px;
+}
+
+
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    color: var(--secondary-text-color);
+    line-height: 1.8rem;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+ul {
+    list-style: none;
+}
+
+.small-bold-text {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: var(--padding-inline-section);
+    overflow: hidden;
+}
+
+.flex {
+    align-items: center;
+    display: flex;
+}
+
+.hover-link {
+    color: var(--primary-text-color);
+    transition: 0.2s;
+}
+
+.hover-link:hover {
+    color: var(--accent-color);
+}
+
+.primary-button {
+    background-color: var(--accent-color);
+    border-radius: 6px;
+    font-weight: 700;
+    color: white !important;
+    padding: 12px 24px;
+    box-shadow: 0 0 2px var(--secondary-text-color);
+    transition: 0.2s ease-out;
+    text-align: center;
+}
+
+.primary-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+.secondary-button {
+    border: 0.5px solid var(--secondary-text-color);
+    border-radius: 6px;
+    font-weight: 700;
+    color: var(--primary-text-color);
+    padding: 12px 24px;
+    transition: 0.2s ease-out;
+}
+
+.secondary-button:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color) !important;
+}
+
+/* Top banner */
+.top-banner {
+    background: linear-gradient(rgb(40, 214, 14), black);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+}
+
+.banner-text {
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+}
+
+.main-nav {
+    width: 100%;
+    height: 150px;
+    margin-top: -60px;
+   
+    margin-top: auto;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+.company-logo img{
+    width: 200px;
+}
+
+.nav-links {
+    
+    flex-basis: 730px;
+}
+
+.nav-links ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    font-size: 15px;
+}
+
+.nav-links ul li:hover {
+    transition: 0.5s ease-out;
+    transform: scale(1.1);
+}
+
+
+
+
+/* Heading */
+.heading {
+    text-align: center;
+    margin-left: 530px;
+}
+
+/* Boxes */
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1400px;
+    width: 90%;
+    margin: 50px auto;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 60px var(--padding-inline-section);
+    justify-content: center;
+    align-items: center;
+}
+
+.unit-boxes {
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    height: 200px;
+    padding: 20px;
+    border-radius: 20px; /* Slightly reduced to enhance 3D effect */
+    background-color: linear-gradient(to right, red 15%, yellow 15%); /* Use a solid color for better contrast */
+    border: 2px solid #831d1d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    perspective: 1000px; /* Perspective to create a 3D effect */
+}
+
+.unit-boxes a {
+    color: blue;
+}
+
+.unit-boxes:hover {
+    transition: transform 0.5s ease;
+    background-color:  linear-gradient(to right, pink 15%, white 30%, green 20%);
+    transform: scale(1.1); /* Apply a scale of 1.1 when hovering */
+}
+
+.unit-boxes:not(:hover) {
+    transform: scale(1); /* Return to the initial scale when not hovering */
+    transition: transform 0.5s ease;
+}
+
+/* Footer */
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333; /* Match the background color of the main footer */
+    color: #fff; /* Text color */
+    border-top: 1px solid #555; /* Border to separate from other footer content */
+    font-size: 0.9em; /* Slightly smaller font size */
+}
+        /* Base styles for nav-toggle and nav-links */
+.nav-toggle {
+    display: none; /* Hidden by default */
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.nav-toggle i {
+    color: #333;
+}
+
+/* Nav links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+/* Responsive styles for different screen sizes */
+@media (max-width: 992px) {
+    .nav-toggle {
+        display: block;
+        position: absolute;
+        top: 15px; /* Adjust top position as needed */
+        right: 15px; /* Adjust right position as needed */
+    }
+
+    .nav-links {
+        display: none; /* Hide nav links by default on small screens */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Position below the nav toggle */
+        right: 0;
+        width: 100%;
+        background-color: white; /* Background color for the dropdown */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown effect */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show nav links when toggle is active */
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-links ul li {
+        margin: 10px 0;
+    }
+
+    .heading {
+        margin-left: 0; /* Center heading on small screens */
+        text-align: center;
+    }
+
+    .heading h1 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .heading {
+        margin-top: 10px; /* Adjust top margin */
+        margin-left: 0; /* Center heading */
+    }
+
+    .boxes {
+        flex-direction: column; /* Stack boxes vertically */
+    }
+
+    .unit-boxes {
+        width: 90%; /* Adjust width for small screens */
+        margin: 10px auto; /* Center boxes */
+    }
+}
+
+@media (max-width: 576px) {
+    .company-logo img {
+        width: 100px; /* Adjust logo size */
+    }
+
+    h1 {
+        font-size: 1.4rem; /* Adjust font size */
+    }
+
+    .primary-button, .secondary-button {
+        padding: 8px 16px; /* Adjust button padding */
+    }
+
+    .banner-text {
+        font-size: 0.75rem; /* Adjust font size */
+    }
+}
+
+@media (max-width: 412px) {
+    .company-logo img {
+        width: 90px; /* Further adjust logo size */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <div class="container">
+            <div class="small-bold-text banner-text">Convert with Confidence.</div>
+        </div>
+    </div>
+
+    <section>
+        <nav>
+            <div class="container main-nav flex">
+                <div class="company-logo">
+                    <a href="#" class="company-logo">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjniPfa-4UfjBvJDsyG4hI1r3LTMYAzSsS8VGxgRN7TGd-GJRUzt4H9H8MJ4Mz2PMYny3H7WWPykMel_jSr5JDlhKrBu9qyvsrpdyhpvIzpI8kprwQ7lT1QV5skG-5BVoZKhn_jtQvmbShVOhgdKTULVaP48qtEn99h1uGblH4A3cEoC7cQj35nloJxJvM/s320/Cvt.png" alt="company logo">
+                    </a>
+                </div>
+                
+                <div class="nav-links" id="nav-links">
+                    <ul class="flex">
+                        <li><a href="#" class="hover-link">Home</a></li>
+                        <li><a href="#" class="hover-link">About Us</a></li>
+                        <li><a href="#" class="hover-link">Tech blogs</a></li>
+                        <li><a href="#" class="hover-link">Contact Us</a></li>
+                        <li><a href="#" class="hover-link secondary-button">Sign-in</a></li>
+                        <li><a href="#" class="hover-link primary-button">Sign-up</a></li>
+                    </ul>
+                </div>
+                <div class="nav-toggle">
+                    <a href="#" class="toggle-icon">
+                        <i class="fa-solid fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <section>
+        <div class="heading flex">
+            <h1>Select for Convert</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="boxes flex">
+            <div class="unit-boxes flex">
+                <a href="numbersys.html"><h2 class="unit">Number system</h2><p>Binary, Decimal, Octal, Hexadecimal</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="Metricsystem.html"><h2 class="unit">Metric system</h2><p>m, cm, nm, µm, dm, dam, km, Mm, etc</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="imperialsystem.html"><h2 class="unit">Imperial System</h2><p>thou, Inch, Foot, Yard, Chain, etc</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="LCMandHCF.html"><h2 class="unit">Arithmetic System</h2><p>Find LCM and HCF of any number</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="volumeststem.html"><h2 class="unit">Volume system</h2><p>Milliliters, Centiliters, Liters, dc, etc</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="currencysystem.html"><h2 class="unit">Currency system</h2><p>Dollars, Indian Rupees, Euro, etc</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="#"><h2 class="unit">Time system</h2><p>Minutes, Seconds, Hours, Months, etc</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="Temprature.html"><h2 class="unit">Temperature system</h2><p>Celsius, Kelvin, Fahrenheit</p></a>
+            </div>
+
+            <div class="unit-boxes flex">
+                <a href="calculator.html"><h2 class="unit">Calculator</h2></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2024 YourWebsite | Designed by Kapil Dev
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/261915ca3f.js" crossorigin="anonymous"></script>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

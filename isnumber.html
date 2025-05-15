@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rational or Irrational Number Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .instructions {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rational or Irrational Number Checker</h1>
+        <div class="instructions">
+            Enter a mathematical expression (e.g., <code>sqrt(2)</code> for √2, <code>pi</code> for π).
+        </div>
+        <input type="text" id="numberInput" placeholder="Enter a number or expression">
+        <button onclick="checkNumber()">Check</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.min.js"></script>
+    <script>
+        function checkNumber() {
+            const input = document.getElementById('numberInput').value;
+            
+            try {
+                // Use Math.js to evaluate the expression
+                const number = math.evaluate(input);
+
+                const isRational = (num) => {
+                    // Check if the number is an integer
+                    if (Number.isInteger(num)) {
+                        return true;
+                    }
+
+                    // Try converting the number to a fraction
+                    try {
+                        const fraction = math.fraction(num);
+                        const decimal = math.number(fraction);
+
+                        // Check if the fraction converted back to a number is exactly the same
+                        return num === decimal;
+                    } catch (e) {
+                        return false;
+                    }
+                };
+
+                const result = isRational(number) ? 'Rational' : 'Irrational';
+                document.getElementById('result').innerText = `The number ${number} (${input}) is ${result}.`;
+            } catch (error) {
+                document.getElementById('result').innerText = 'Invalid input. Please enter a valid number or expression.';
+            }
+        }
+    </script>
+</body>
+</html>

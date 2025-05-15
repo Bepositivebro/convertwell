@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number System Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px; /* Adjust max-width as needed */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding and border don't increase width */
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* Match the background color of the main footer */
+            color: #fff; /* Text color */
+            border-top: 1px solid #555; /* Border to separate from other footer content */
+            font-size: 0.9em; /* Slightly smaller font size */
+        } 
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+
+            .footer-bottom {
+                font-size: 0.8em; /* Adjust font size for smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number System Converter</h1>
+        <input type="text" id="inputNumber" placeholder="Enter a number">
+        <select id="inputBase">
+            <option value="2">Binary</option>
+            <option value="8">Octal</option>
+            <option value="10" selected>Decimal</option>
+            <option value="16">Hexadecimal</option>
+        </select>
+        <button onclick="convertNumber()">Convert</button>
+        
+        <div id="results">
+            <p>Binary: <span id="binaryResult"></span></p>
+            <p>Octal: <span id="octalResult"></span></p>
+            <p>Decimal: <span id="decimalResult"></span></p>
+            <p>Hexadecimal: <span id="hexResult"></span></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2024 YourWebsite | Designed by Kapil Dev
+        </div>
+    </footer>
+
+    <script>
+        function convertNumber() {
+            let inputNumber = document.getElementById('inputNumber').value;
+            let inputBase = parseInt(document.getElementById('inputBase').value);
+
+            if (!inputNumber) {
+                alert("Please enter a number.");
+                return;
+            }
+
+            let decimalNumber;
+
+            try {
+                decimalNumber = parseFloat(parseInt(inputNumber, inputBase));
+                if (isNaN(decimalNumber)) {
+                    throw new Error("Invalid number for the selected base.");
+                }
+            } catch (e) {
+                alert(e.message);
+                return;
+            }
+
+            document.getElementById('binaryResult').textContent = convertToBase(decimalNumber, 2);
+            document.getElementById('octalResult').textContent = convertToBase(decimalNumber, 8);
+            document.getElementById('decimalResult').textContent = decimalNumber.toString(10);
+            document.getElementById('hexResult').textContent = convertToBase(decimalNumber, 16).toUpperCase();
+        }
+
+        function convertToBase(number, base) {
+            let integerPart = Math.floor(number);
+            let fractionalPart = number - integerPart;
+
+            let integerResult = integerPart.toString(base);
+            if (fractionalPart === 0) return integerResult;
+
+            let fractionalResult = '';
+            let fraction = fractionalPart;
+
+            for (let i = 0; i < 10 && fraction !== 0; i++) {
+                fraction *= base;
+                let fractionalDigit = Math.floor(fraction);
+                fractionalResult += fractionalDigit.toString(base);
+                fraction -= fractionalDigit;
+            }
+
+            return `${integerResult}.${fractionalResult}`;
+        }
+    </script>
+</body>
+</html>

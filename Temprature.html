@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px; /* Adjust max-width as needed */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding and border don't increase width */
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333; /* Match the background color of the main footer */
+            color: #fff; /* Text color */
+            border-top: 1px solid #555; /* Border to separate from other footer content */
+            font-size: 0.9em; /* Slightly smaller font size */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        } 
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <input type="number" id="inputTemp" placeholder="Enter temperature">
+        <select id="inputUnit">
+            <option value="celsius">Celsius (°C)</option>
+            <option value="fahrenheit">Fahrenheit (°F)</option>
+            <option value="kelvin">Kelvin (K)</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        
+        <div id="results">
+            <!-- Output results will be displayed here -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2024 YourWebsite | Designed by Kapil Dev
+        </div>
+    </footer>
+
+    <script>
+        function convertTemperature() {
+            const inputTemp = parseFloat(document.getElementById('inputTemp').value);
+            const inputUnit = document.getElementById('inputUnit').value;
+
+            if (isNaN(inputTemp)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            let celsius, fahrenheit, kelvin;
+
+            switch (inputUnit) {
+                case 'celsius':
+                    celsius = inputTemp;
+                    fahrenheit = (celsius * 9/5) + 32;
+                    kelvin = celsius + 273.15;
+                    break;
+                case 'fahrenheit':
+                    fahrenheit = inputTemp;
+                    celsius = (fahrenheit - 32) * 5/9;
+                    kelvin = (fahrenheit - 32) * 5/9 + 273.15;
+                    break;
+                case 'kelvin':
+                    kelvin = inputTemp;
+                    celsius = kelvin - 273.15;
+                    fahrenheit = (kelvin - 273.15) * 9/5 + 32;
+                    break;
+                default:
+                    break;
+            }
+
+            const results = document.getElementById('results');
+            results.innerHTML = ''; // Clear previous results
+
+            const p1 = document.createElement('p');
+            p1.textContent = `Celsius (°C): ${celsius.toFixed(2)}`;
+            results.appendChild(p1);
+
+            const p2 = document.createElement('p');
+            p2.textContent = `Fahrenheit (°F): ${fahrenheit.toFixed(2)}`;
+            results.appendChild(p2);
+
+            const p3 = document.createElement('p');
+            p3.textContent = `Kelvin (K): ${kelvin.toFixed(2)}`;
+            results.appendChild(p3);
+        }
+    </script>
+</body>
+</html>

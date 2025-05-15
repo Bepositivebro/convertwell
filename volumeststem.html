@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Volume Converter</h1>
+        <input type="number" id="inputVolume" placeholder="Enter volume">
+        <select id="inputUnit">
+            <option value="ml">Milliliter (ml)</option>
+            <option value="cl">Centiliter (cl)</option>
+            <option value="dl">Deciliter (dl)</option>
+            <option value="L" selected>Liter (L)</option>
+            <option value="m³">Cubic Meter (m³)</option>
+            <option value="km³">Cubic Kilometer (km³)</option>
+            <option value="in³">Cubic Inch (in³)</option>
+            <option value="ft³">Cubic Foot (ft³)</option>
+            <option value="yd³">Cubic Yard (yd³)</option>
+            <option value="fl oz">Fluid Ounce (US) (fl oz)</option>
+            <option value="cup">Cup (US)</option>
+            <option value="pt">Pint (US) (pt)</option>
+            <option value="qt">Quart (US) (qt)</option>
+            <option value="gal">Gallon (US) (gal)</option>
+        </select>
+        <button onclick="convertVolume()">Convert</button>
+        
+        <div id="results">
+            <p>Milliliters: <span id="mlResult"></span></p>
+            <p>Centiliters: <span id="clResult"></span></p>
+            <p>Deciliters: <span id="dlResult"></span></p>
+            <p>Liters: <span id="LResult"></span></p>
+            <p>Cubic Meters: <span id="m3Result"></span></p>
+            <p>Cubic Kilometers: <span id="km3Result"></span></p>
+            <p>Cubic Inches: <span id="in3Result"></span></p>
+            <p>Cubic Feet: <span id="ft3Result"></span></p>
+            <p>Cubic Yards: <span id="yd3Result"></span></p>
+            <p>Fluid Ounces (US): <span id="flOzResult"></span></p>
+            <p>Cups (US): <span id="cupResult"></span></p>
+            <p>Pints (US): <span id="ptResult"></span></p>
+            <p>Quarts (US): <span id="qtResult"></span></p>
+            <p>Gallons (US): <span id="galResult"></span></p>
+        </div>
+    </div>
+    <script>
+        function convertVolume() {
+            const inputVolume = parseFloat(document.getElementById('inputVolume').value);
+            const inputUnit = document.getElementById('inputUnit').value;
+
+            if (isNaN(inputVolume)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            const volumeInLiters = convertToLiters(inputVolume, inputUnit);
+
+            document.getElementById('mlResult').textContent = (volumeInLiters * 1e3).toFixed(2);
+            document.getElementById('clResult').textContent = (volumeInLiters * 1e2).toFixed(2);
+            document.getElementById('dlResult').textContent = (volumeInLiters * 1e1).toFixed(2);
+            document.getElementById('LResult').textContent = volumeInLiters.toFixed(2);
+            document.getElementById('m3Result').textContent = (volumeInLiters * 1e-3).toFixed(2);
+            document.getElementById('km3Result').textContent = (volumeInLiters * 1e-12).toFixed(2);
+            document.getElementById('in3Result').textContent = (volumeInLiters * 61.0237).toFixed(2);
+            document.getElementById('ft3Result').textContent = (volumeInLiters * 0.0353147).toFixed(2);
+            document.getElementById('yd3Result').textContent = (volumeInLiters * 0.00130795).toFixed(2);
+            document.getElementById('flOzResult').textContent = (volumeInLiters * 33.814).toFixed(2);
+            document.getElementById('cupResult').textContent = (volumeInLiters * 4.22675).toFixed(2);
+            document.getElementById('ptResult').textContent = (volumeInLiters * 2.11338).toFixed(2);
+            document.getElementById('qtResult').textContent = (volumeInLiters * 1.05669).toFixed(2);
+            document.getElementById('galResult').textContent = (volumeInLiters * 0.264172).toFixed(2);
+        }
+
+        function convertToLiters(volume, unit) {
+            switch (unit) {
+                case 'ml':
+                    return volume * 1e-3;
+                case 'cl':
+                    return volume * 1e-2;
+                case 'dl':
+                    return volume * 1e-1;
+                case 'L':
+                    return volume;
+                case 'm³':
+                    return volume * 1e3;
+                case 'km³':
+                    return volume * 1e12;
+                case 'in³':
+                    return volume * 0.0163871;
+                case 'ft³':
+                    return volume * 28.3168;
+                case 'yd³':
+                    return volume * 764.555;
+                case 'fl oz':
+                    return volume * 0.0295735;
+                case 'cup':
+                    return volume * 0.24;
+                case 'pt':
+                    return volume * 0.473176;
+                case 'qt':
+                    return volume * 0.946353;
+                case 'gal':
+                    return volume * 3.78541;
+                default:
+                    return volume;
+            }
+        }
+    </script>
+</body>
+</html>
